@@ -17,8 +17,9 @@ const Mustache = require('mustache');
       description: 'event name to search (partial match)',
     })
     .option('after', {
-      description: 'get RFC3339 style (default is now)',
+      description: 'RFC3339 style',
       default: new Date().toISOString(),
+      defaultDescription: 'after now',
     })
     .option('format', {
       description:
@@ -37,7 +38,8 @@ const Mustache = require('mustache');
       description: 'use env NODE_REFRESH_TOKEN is better',
       default: process.env.NODE_REFRESH_TOKEN,
     })
-    .version(false).argv;
+    .version(false)
+    .wrap(null).argv;
 
   const oauth2Client = new google.auth.OAuth2(argv.clientId, argv.clientSecret);
   oauth2Client.credentials = {
