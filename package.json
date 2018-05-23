@@ -1,0 +1,27 @@
+{
+  "name": "next-gcalendar-event",
+  "version": "1.0.0",
+  "description": "Search Next Google Calendar Event",
+  "main": "index.js",
+  "bin": {
+    "next-gcalendar-event": "bin/next-gcalendar-event"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okitan/next-gcalendar-event.git"
+  },
+  "author": "okitakunio@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okitan/next-gcalendar-event/issues"
+  },
+  "homepage": "https://github.com/okitan/next-gcalendar-event#readme",
+  "dependencies": {
+    "googleapis": "^30.0.0",
+    "mustache": "^2.3.0",
+    "yargs": "^11.0.0"
+  }
+}

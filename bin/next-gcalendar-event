@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const { google } = require('googleapis');
+const Mustache = require('mustache');
+
+(async () => {
+  const argv = require('yargs')
+    .usage('$0 [Options]')
+    .option('calendar-id', {
+      description: 'calendar id to search',
+      required: true,
+    })
+    .option('query', {
+      alias: 'q',
+      description: 'event name to search (partial match)',
+    })
+    .option('after', {
+      description: 'get RFC3339 style (default is now)',
+      default: new Date().toISOString(),
+    })
+    .option('format', {
+      description:
+        'mustach format to define output. See: https://developers.google.com/calendar/v3/reference/events to know object schema',
+      default: '{{summary}} {{start.dateTime}}-{{end.dateTime}}',
+    })
+    .option('client-id', {
+      description: 'use env NODE_CLIENT_ID is better',
+      default: process.env.NODE_CLIENT_ID,
+    })
+    .option('client-secret', {
+      description: 'use env NODE_CLIENT_SECRET is better',
+      default: process.env.NODE_CLIENT_SECRET,
+    })
+    .option('refresh-token', {
+      description: 'use env NODE_REFRESH_TOKEN is better',
+      default: process.env.NODE_REFRESH_TOKEN,
+    })
+    .version(false).argv;
+
+  const oauth2Client = new google.auth.OAuth2(argv.clientId, argv.clientSecret);
+  oauth2Client.credentials = {
+    refresh_token: argv.refreshToken,
+  };
+
+  const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+
+  const searchOptions = {
+    orderBy: 'startTime',
+    singleEvents: true,
+    calendarId: argv.calendarId,
+    timeMin: argv.after,
+  };
+
+  if (argv.query) {
+    searchOptions.query = argv.query;
+  }
+
+  const result = await calendar.events.list(searchOptions);
+
+  let event;
+  if (argv.query) {
+    event = result.data.items.find(event => event.summary.includes(argv.query));
+  } else {
+    event = result.data.items[0];
+  }
+
+  if (event) {
+    console.log(Mustache.render(argv.format, event));
+  } else {
+    console.error('no events found');
+    process.exit(1);
+  }
+})();
