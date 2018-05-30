@@ -2,9 +2,9 @@
   "name": "next-gcalendar-event",
   "version": "1.0.0",
   "description": "Search Next Google Calendar Event",
-  "main": "index.js",
+  "main": "lib/cli.js",
   "bin": {
-    "next-gcalendar-event": "bin/next-gcalendar-event"
+    "next-gcalendar-event": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
