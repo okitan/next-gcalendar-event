@@ -1,3 +1,13 @@
+## 1.1.2 - 2018-06-04
+
+### Fixed
+
+* fix `--tommorrow` does not work because of type_repository
+
+### Changed
+
+* CLI check options strictly
+
 ## 1.1.1 - 2018-05-31
 
 ### Fixed
