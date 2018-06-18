@@ -1,3 +1,9 @@
+## 1.2.1 - 2018-06-18
+
+### Fixed
+
+- Unhandled exceptions
+
 ## 1.2.0 - 2018-06-14
 
 ### Added
