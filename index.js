@@ -4,4 +4,11 @@
 
 const { cli } = require('./lib/cli');
 
-cli(process.argv.slice(1));
+(async () => {
+  try {
+    await cli(process.argv.slice(1));
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+})();
