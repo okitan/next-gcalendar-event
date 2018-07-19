@@ -1,3 +1,13 @@
+## 1.4.0 - 2018-07-19
+
+### Added
+
+- `--before` `--after` accepts relative format like -1h and 1d
+
+### Changed
+
+- `--before` `--after` accepts any style moment.js can handle
+
 ## 1.3.0 - 2018-07-13
 
 ### Added
