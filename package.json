@@ -21,6 +21,7 @@
   "homepage": "https://github.com/okitan/next-gcalendar-event#readme",
   "dependencies": {
     "googleapis": "^30.0.0",
+    "moment": "^2.22.2",
     "mustache": "^2.3.0",
     "yargs": "^11.0.0"
   }
