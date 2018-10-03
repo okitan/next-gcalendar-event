@@ -1,3 +1,9 @@
+## 1.4.1 - 2018-10-03
+
+### Fixed
+
+- Bad Request for null
+
 ## 1.4.0 - 2018-07-19
 
 ### Added
