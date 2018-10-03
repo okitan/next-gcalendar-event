@@ -1,3 +1,9 @@
+## 2.0.0 - 2018-10-03
+
+### Fixed
+
+- `--done` checks events are done (If you like previous behavior use `--before 0h`)
+
 ## 1.5.0 - 2018-10-03
 
 ### Added
