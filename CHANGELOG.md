@@ -1,3 +1,9 @@
+## 1.5.0 - 2018-10-03
+
+### Added
+
+- when events found command after `--` is invoked
+
 ## 1.4.1 - 2018-10-03
 
 ### Fixed
