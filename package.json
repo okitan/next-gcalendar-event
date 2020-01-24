@@ -22,7 +22,7 @@
   "dependencies": {
     "googleapis": "^47.0.0",
     "moment": "^2.22.2",
-    "mustache": "^2.3.0",
+    "mustache": "^4.0.0",
     "yargs": "^11.0.0"
   }
 }
