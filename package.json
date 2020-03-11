@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/okitan/next-gcalendar-event#readme",
   "dependencies": {
-    "googleapis": "^47.0.0",
+    "googleapis": "^48.0.0",
     "moment": "^2.22.2",
     "mustache": "^4.0.0",
     "yargs": "^11.0.0"
