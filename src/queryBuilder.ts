@@ -78,7 +78,7 @@ export function buildQuery(queryOption: QueryOption): Query {
   if (queryOption.after) {
     const matched = queryOption.after.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMin = dayjs(now).add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
+      query.timeMin = now.add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
     } else {
       query.timeMin = dayjs(queryOption.after);
     }
@@ -87,7 +87,7 @@ export function buildQuery(queryOption: QueryOption): Query {
   if (queryOption.before) {
     const matched = queryOption.before.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMax = dayjs(now).add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
+      query.timeMax = now.add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
     } else {
       query.timeMax = dayjs(queryOption.before);
     }
@@ -95,22 +95,22 @@ export function buildQuery(queryOption: QueryOption): Query {
 
   // today > tommorrow > yesterday
   if (queryOption.today) {
-    query.timeMin = dayjs(now).startOf("day");
-    query.timeMax = dayjs(now).startOf("day").add(1, "days");
+    query.timeMin = now.startOf("day");
+    query.timeMax = now.startOf("day").add(1, "days");
   } else if (queryOption.tommorow) {
-    query.timeMin = dayjs(now).startOf("day").add(1, "days");
-    query.timeMax = dayjs(now).startOf("day").add(2, "days");
+    query.timeMin = now.startOf("day").add(1, "days");
+    query.timeMax = now.startOf("day").add(2, "days");
   } else if (queryOption.yesterday) {
-    query.timeMin = dayjs(now).startOf("day").add(-1, "days");
-    query.timeMax = dayjs(now).startOf("day");
+    query.timeMin = now.startOf("day").add(-1, "days");
+    query.timeMax = now.startOf("day");
   }
 
   if (queryOption.done) {
-    query.timeMax = dayjs(now);
+    query.timeMax = now;
     query.finished = true;
   }
   if (queryOption.todo) {
-    query.timeMin = dayjs(now);
+    query.timeMin = now;
   }
   // queryOption;
   return query;
