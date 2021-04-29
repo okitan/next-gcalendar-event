@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
+import dayjs from "dayjs";
 import { calendar_v3 } from "googleapis";
-import moment from "moment";
 import Mustache from "mustache";
 import yargs from "yargs";
 
@@ -61,7 +61,7 @@ export async function hander({
     // timeMax does not care events are over
     if (timeMax && finished) {
       if (!event.end || !event.end.dateTime) return false;
-      if (moment(event.end.dateTime) > timeMax) return false;
+      if (dayjs(event.end.dateTime) > timeMax) return false;
     }
 
     return true;
@@ -76,7 +76,7 @@ export async function hander({
   if (!args._.length) {
     const [command, ...argv] = args._;
 
-    const p = spawn(command, argv);
+    const p = spawn(command as string, argv as string[]);
     p.stdout.on("data", process.stdout.write);
     p.stderr.on("data", process.stderr.write);
     p.on("close", process.exit);
