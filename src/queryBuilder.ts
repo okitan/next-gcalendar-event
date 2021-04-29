@@ -78,7 +78,7 @@ export function buildQuery(queryOption: QueryOption): Query {
   if (queryOption.after) {
     const matched = queryOption.after.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMin = now.add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
+      query.timeMin = now.add(parseInt(matched[1], 10), matched[2] as dayjs.OpUnitType);
     } else {
       query.timeMin = dayjs(queryOption.after);
     }
@@ -87,7 +87,7 @@ export function buildQuery(queryOption: QueryOption): Query {
   if (queryOption.before) {
     const matched = queryOption.before.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMax = now.add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
+      query.timeMax = now.add(parseInt(matched[1], 10), matched[2] as dayjs.OpUnitType);
     } else {
       query.timeMax = dayjs(queryOption.before);
     }
