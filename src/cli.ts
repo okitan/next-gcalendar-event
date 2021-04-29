@@ -8,7 +8,6 @@ import { addQueryOptions, buildQuery } from "./queryBuilder";
 import { CalendarClientArgument, injectCalendarClient } from "./services/gcaledar";
 import { addGoogleCredentialsOptions } from "./services/google";
 
-
 export const command = "$0";
 export const description = "check next google calendar event";
 
