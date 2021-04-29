@@ -1,8 +1,8 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import yargs from "yargs";
 
 export type QueryOption = {
-  now?: moment.Moment;
+  now?: dayjs.Dayjs;
 
   query?: string;
   after?: string;
@@ -62,13 +62,13 @@ export function addQueryOptions<T>(yargs: yargs.Argv<T>) {
 
 type Query = {
   q?: string;
-  timeMin?: moment.Moment;
-  timeMax?: moment.Moment;
+  timeMin?: dayjs.Dayjs;
+  timeMax?: dayjs.Dayjs;
   finished?: boolean;
 };
 
 export function buildQuery(queryOption: QueryOption): Query {
-  const now = queryOption.now ?? moment();
+  const now = queryOption.now ?? dayjs();
 
   const query: Query = {
     q: queryOption.query,
@@ -78,39 +78,39 @@ export function buildQuery(queryOption: QueryOption): Query {
   if (queryOption.after) {
     const matched = queryOption.after.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMin = moment(now).add(matched[1], matched[2] as moment.unitOfTime.DurationConstructor);
+      query.timeMin = dayjs(now).add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
     } else {
-      query.timeMin = moment(queryOption.after);
+      query.timeMin = dayjs(queryOption.after);
     }
   }
 
   if (queryOption.before) {
     const matched = queryOption.before.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
     if (matched) {
-      query.timeMax = moment(now).add(matched[1], matched[2] as moment.unitOfTime.DurationConstructor);
+      query.timeMax = dayjs(now).add(parseInt(matched[1]), matched[2] as dayjs.OpUnitType);
     } else {
-      query.timeMax = moment(queryOption.before);
+      query.timeMax = dayjs(queryOption.before);
     }
   }
 
   // today > tommorrow > yesterday
   if (queryOption.today) {
-    query.timeMin = moment(now).startOf("day");
-    query.timeMax = moment(now).startOf("day").add(1, "days");
+    query.timeMin = dayjs(now).startOf("day");
+    query.timeMax = dayjs(now).startOf("day").add(1, "days");
   } else if (queryOption.tommorow) {
-    query.timeMin = moment(now).startOf("day").add(1, "days");
-    query.timeMax = moment(now).startOf("day").add(2, "days");
+    query.timeMin = dayjs(now).startOf("day").add(1, "days");
+    query.timeMax = dayjs(now).startOf("day").add(2, "days");
   } else if (queryOption.yesterday) {
-    query.timeMin = moment(now).startOf("day").add(-1, "days");
-    query.timeMax = moment(now).startOf("day");
+    query.timeMin = dayjs(now).startOf("day").add(-1, "days");
+    query.timeMax = dayjs(now).startOf("day");
   }
 
   if (queryOption.done) {
-    query.timeMax = moment(now);
+    query.timeMax = dayjs(now);
     query.finished = true;
   }
   if (queryOption.todo) {
-    query.timeMin = moment(now);
+    query.timeMin = dayjs(now);
   }
   // queryOption;
   return query;
