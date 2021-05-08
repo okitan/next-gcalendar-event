@@ -1,6 +1,6 @@
 {
   "name": "next-gcalendar-event",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Search Next Google Calendar Event",
   "main": "lib/cli.js",
   "bin": {
