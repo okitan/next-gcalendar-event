@@ -4,9 +4,10 @@
   "description": "Search Next Google Calendar Event",
   "main": "lib/cli.js",
   "bin": {
-    "next-gcalendar-event": "index.js"
+    "next-gcalendar-event": "lib/index.js"
   },
   "scripts": {
+    "build": "rm -rf lib && tsc --build tsconfig.build.json",
     "exec": "ts-node src/index.ts",
     "test": "jest"
   },
