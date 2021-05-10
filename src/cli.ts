@@ -73,7 +73,7 @@ export async function handler({
   }
 
   // execute trail command
-  if (!args._.length) {
+  if (args._.length) {
     const [command, ...argv] = args._;
 
     const p = spawn(command as string, argv as string[]);
@@ -83,5 +83,5 @@ export async function handler({
     return;
   }
 
-  console.log(Mustache.render(args.format, event));
+  console.log(Mustache.render(args.format, found));
 }
