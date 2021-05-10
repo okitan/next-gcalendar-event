@@ -36,7 +36,7 @@ export function builder<T>(yargs: yargs.Argv<T>) {
 
 export type Extract<T> = T extends yargs.Argv<infer U> ? U : never;
 
-export async function hander({
+export async function handler({
   calendarClient,
   calendarId,
   ...args
