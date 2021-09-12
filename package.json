@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/jest": "26.0.24",
     "@types/mustache": "4.1.2",
-    "esbuild": "0.12.25",
+    "esbuild": "0.12.26",
     "esbuild-jest": "0.5.0",
     "jest": "26.6.3",
     "prettier": "2.4.0",
