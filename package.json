@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "rm -rf lib && tsc --build tsconfig.build.json",
-    "exec": "ts-node src/index.ts",
+    "build:check": "tsc --noEmit",
+    "exec": "ts-node -T src/index.ts",
     "test": "jest"
   },
   "repository": {

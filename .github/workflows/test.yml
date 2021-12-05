@@ -4,6 +4,18 @@ on:
   push:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+          cache: npm
+      - run: npm ci
+      - run: npm run build:check
+
   test:
     runs-on: ubuntu-latest
 
@@ -12,10 +24,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "12"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          cache: npm
       - run: npm ci
       - name: test
         uses: mattallty/jest-github-action@master
