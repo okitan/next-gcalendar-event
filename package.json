@@ -34,7 +34,7 @@
     "esbuild-jest": "0.5.0",
     "jest": "27.4.3",
     "prettier": "2.5.0",
-    "ts-node": "9.1.1",
+    "ts-node": "10.4.0",
     "typescript": "4.5.2"
   }
 }
