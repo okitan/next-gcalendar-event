@@ -1,29 +1,31 @@
 import { spawn } from "child_process";
 import dayjs from "dayjs";
-import { calendar_v3 } from "googleapis";
 import Mustache from "mustache";
-import yargs from "yargs";
+import type yargs from "yargs";
+
+import type { calendar_v3 } from "@googleapis/calendar";
 
 import { addQueryOptions, buildQuery } from "./queryBuilder";
-import { CalendarClientArgument, injectCalendarClient } from "./services/gcaledar";
+import { addCalendarClientOptions } from "./services/gcaledar";
 import { addGoogleCredentialsOptions } from "./services/google";
 
 export const command = "$0";
 export const description = "check next google calendar event";
 
 export function builder<T>(yargs: yargs.Argv<T>) {
-  return addGoogleCredentialsOptions(
-    addQueryOptions(
-      yargs.options({
-        calendarId: {
-          type: "string",
-          description: "calendar id to search",
-          required: true,
-        },
-      })
+  return addCalendarClientOptions(
+    addGoogleCredentialsOptions(
+      addQueryOptions(
+        yargs.options({
+          calendarId: {
+            type: "string",
+            description: "calendar id to search",
+            required: true,
+          },
+        })
+      )
     )
   )
-    .middleware([injectCalendarClient])
     .option("format", {
       description:
         "mustach format to define output. See: https://developers.google.com/calendar/v3/reference/events to know object schema",
@@ -40,7 +42,7 @@ export async function handler({
   calendarClient,
   calendarId,
   ...args
-}: yargs.Arguments<Extract<ReturnType<typeof builder>>> & CalendarClientArgument) {
+}: yargs.Arguments<Extract<ReturnType<typeof builder>>>) {
   const { timeMin, timeMax, finished, ...query } = buildQuery(args);
 
   const searchOptions: calendar_v3.Params$Resource$Events$List = {
