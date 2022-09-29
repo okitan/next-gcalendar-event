@@ -1,5 +1,6 @@
-import { type calendar_v3, google } from "googleapis";
 import type yargs from "yargs";
+
+import { calendar, type calendar_v3 } from "@googleapis/calendar";
 
 import { type OAuth2ClientArgument } from "./google";
 
@@ -12,12 +13,12 @@ export function addCalendarClientOptions<T extends OAuth2ClientArgument>(yargs: 
     .options({
       calendarClient: {
         hidden: true,
-        default: google.calendar({ version: "v3" }),
+        default: calendar({ version: "v3" }),
       },
     })
     .middleware([injectCalendarClient]);
 }
 
 export function injectCalendarClient(args: OAuth2ClientArgument & CalendarClientArgument): void {
-  args.calendarClient = google.calendar({ version: "v3", auth: args.oauth2Client });
+  args.calendarClient = calendar({ version: "v3", auth: args.oauth2Client });
 }

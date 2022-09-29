@@ -1,8 +1,9 @@
 import { spawn } from "child_process";
 import dayjs from "dayjs";
-import { type calendar_v3 } from "googleapis";
 import Mustache from "mustache";
 import type yargs from "yargs";
+
+import type { calendar_v3 } from "@googleapis/calendar";
 
 import { addQueryOptions, buildQuery } from "./queryBuilder";
 import { addCalendarClientOptions } from "./services/gcaledar";
