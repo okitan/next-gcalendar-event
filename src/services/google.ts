@@ -1,5 +1,5 @@
 import { OAuth2Client } from "google-auth-library";
-import yargs from "yargs";
+import type yargs from "yargs";
 
 type GoogleCredentialsOptions = {
   clientId: string;
@@ -32,16 +32,16 @@ export function addGoogleCredentialsOptions<T>(yargs: yargs.Argv<T>) {
         defaultDescription: "$NODE_REFRESH_TOKEN",
         demandOption: true,
       },
+      oauth2Client: {
+        hidden: true,
+        default: new OAuth2Client(),
+      },
     })
-    .middleware(injectOAuth2Client);
+    .middleware([injectOAuth2Client]);
 }
 
-function injectOAuth2Client(_argv: any): OAuth2ClientArgument {
-  const argv = _argv as GoogleCredentialsOptions; // FIXME:
-
-  return {
-    oauth2Client: createOAuth2Client(argv),
-  };
+function injectOAuth2Client(args: GoogleCredentialsOptions & OAuth2ClientArgument): void {
+  args.oauth2Client = createOAuth2Client(args);
 }
 
 function createOAuth2Client({ clientId, clientSecret, refreshToken }: GoogleCredentialsOptions) {
