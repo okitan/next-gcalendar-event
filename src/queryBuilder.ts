@@ -76,18 +76,18 @@ export function buildQuery(queryOption: QueryOption): Query {
 
   // before and after will be overridden other convinience method
   if (queryOption.after) {
-    const matched = queryOption.after.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
+    const matched = queryOption.after.match(/^(-?\d+)(m|h|d|w|M|y)$/);
     if (matched) {
-      query.timeMin = now.add(parseInt(matched[1], 10), matched[2] as dayjs.OpUnitType);
+      query.timeMin = now.add(parseInt(matched[1], 10), matched[2] as "m" | "h" | "d" | "w" | "M" | "y");
     } else {
       query.timeMin = dayjs(queryOption.after);
     }
   }
 
   if (queryOption.before) {
-    const matched = queryOption.before.match(/^(-?\d+)(m|h|d|w|M|Q|y)$/);
+    const matched = queryOption.before.match(/^(-?\d+)(m|h|d|w|M|y)$/);
     if (matched) {
-      query.timeMax = now.add(parseInt(matched[1], 10), matched[2] as dayjs.OpUnitType);
+      query.timeMax = now.add(parseInt(matched[1], 10), matched[2] as "m" | "h" | "d" | "w" | "M" | "y");
     } else {
       query.timeMax = dayjs(queryOption.before);
     }
