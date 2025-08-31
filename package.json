@@ -26,7 +26,7 @@
     "dayjs": "^1.10.4",
     "@googleapis/calendar": "^9.0.0",
     "mustache": "^4.2.0",
-    "yargs": "^17.0.0"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@types/jest": "29.5.14",
